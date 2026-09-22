@@ -1,0 +1,25 @@
+README.md
+  s_a4fdefbacc4ddc::t_41376271379760 3-6
+.github/CODEOWNERS
+  s_a4fdefbacc4ddc::t_41376271379760 1-2
+docs/START-HERE.md
+  s_a4fdefbacc4ddc::t_41376271379760 1-66
+CHARTER.md
+  s_a4fdefbacc4ddc::t_41376271379760 29,39,41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "16118142ee9b7efb20734807fc5d83092855e2f9",
+  "prompts": {},
+  "sessions": {
+    "s_a4fdefbacc4ddc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c6c2-231a-7a30-bbf3-f68a9d08902d",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "abhinavnandwani <abhu.srt@gmail.com>"
+    }
+  }
+}
