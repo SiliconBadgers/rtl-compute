@@ -1,5 +1,9 @@
 # Compute datapaths: team charter
 
+Current assignments are listed in [docs/START-HERE.md](docs/START-HERE.md) and
+the linked issues. The broader directions below provide context; they do not
+replace those deliverables.
+
 ## Purpose
 
 Explore and develop the arithmetic capabilities that turn the accelerator’s intended computations into effective hardware. The team seeks a sound balance among numerical behavior, throughput, latency, area and implementation complexity, using approaches its members choose.
@@ -26,7 +30,7 @@ Preserve explanations, experiments, local checks and implementation knowledge so
 
 ## Boundaries and shared decisions
 
-This team owns arithmetic implementation and its internal pipelines. rtl-control coordinates operations across blocks; rtl-memory owns storage and movement services; soc owns system composition. Architecture and ml-models help establish shared numerical semantics. Verification contributes independent correctness assessment, while physical-design and FPGA provide implementation feedback. A choice that changes visible timing or numerical behavior is discussed with the relevant consumers.
+This team owns arithmetic implementation and its internal pipelines. rtl-control coordinates operations across blocks; rtl-memory owns storage and movement services; soc owns system composition. Architecture and software help establish shared numerical semantics. Verification contributes independent correctness assessment, while physical-design provides implementation feedback. A choice that changes visible timing or numerical behavior is discussed with the relevant consumers.
 
 ## Member autonomy
 
@@ -36,9 +40,9 @@ Members choose operators or design questions that serve the charter and their in
 
 | Partners | Shared concerns |
 |---|---|
-| architecture and ml-models | Exchange operation requirements, numerical assumptions and reference behavior so compute choices remain meaningful to the workload. |
+| architecture and software | Exchange operation requirements, numerical assumptions and reference behavior so compute choices remain meaningful to the workload. |
 | rtl-control and rtl-memory | Agree on operand availability, operation acceptance, result handling and the assumptions that affect scheduling or data movement. |
-| verification, fpga and physical-design | Share behavior and constraints; use independent checks and implementation measurements to assess the strengths and limits of a design. |
+| verification and physical-design | Share behavior and constraints; use independent checks and implementation measurements to assess the strengths and limits of a design. |
 
 ## Possible directions
 

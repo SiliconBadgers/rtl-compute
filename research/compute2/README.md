@@ -1,0 +1,5 @@
+# research/compute2
+
+Compute2's complete independent investigation and proposal for rtl-compute#2. Cover the full operation set; divide tasks within Compute2.
+
+See [the current assignment](../../docs/START-HERE.md).
