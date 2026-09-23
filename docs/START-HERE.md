@@ -1,66 +1,34 @@
-# Compute starting material
+# Compute research: two independent proposals: current work
 
-September 22, 2026. Initial investigations for team discussion; no personal assignments or deadlines.
+Compute1 and Compute2 each investigate the full compute-unit design question and produce their own proposal. They are not splitting arithmetic versus stateful work, and neither team depends on or coordinates its proposal with the other.
 
-## Shared starting points
+## Assignment
 
-- [Editable architecture diagram](https://github.com/SiliconBadgers/architecture/blob/main/docs/accelerator-diagram.md) and [candidate boundaries](https://github.com/SiliconBadgers/architecture/blob/main/contracts/accelerator-boundaries.md).
-- [Workload cases and source shapes](https://github.com/SiliconBadgers/architecture/blob/main/docs/workload-cases.md).
-- [Measured llama.cpp report](https://github.com/SiliconBadgers/software/blob/main/experiments/llama-cpp/2026-09-22/REPORT.md) and [reproduction procedure](https://github.com/SiliconBadgers/software/blob/main/experiments/llama-cpp/2026-09-22/README.md).
-- [Parallel team investigations](https://github.com/SiliconBadgers/planning/blob/main/docs/team-start.md).
+- [Research the complete compute-unit design](https://github.com/SiliconBadgers/rtl-compute/issues/2)
 
-The diagram and engine split are proposals. Start from available shapes and
-reference cases now; use explicit parameters or stubs where decisions remain
-open. Software's broader profiling study is not a prerequisite. Preserve the
-source revision, assumptions, commands and limits of each result. Members and
-leads can choose a different investigation that resolves a relevant uncertainty.
+1. Each team covers matrix/vector arithmetic, projections/output head, attention, DeltaNet/recurrent state, convolution, normalization/activation and layout work.
+2. For each operation, identify arithmetic, sequencing, local control, persistent state and temporary storage. Use Software's existing shapes/formats and profiling evidence now.
+3. Compare shared datapaths with distinct resources/state/control, accounting for prefill/decode utilization, precision, operand bandwidth, buffering and data movement.
+4. Each team checks in its own research note, operation-to-unit mapping, candidate block diagram and recommendation with alternatives, evidence and open questions. Share emerging interfaces with Memory and Control independently.
 
+## Starting evidence
 
-## Compute 1: reusable arithmetic and dataflow
+- [Central diagram](https://github.com/SiliconBadgers/architecture/blob/main/docs/accelerator-diagram.md)
+- [Recorded Software profiling package](https://github.com/SiliconBadgers/software/tree/main/experiments/llama-cpp/2026-09-22)
 
-Start with the [matrix cases CSV](https://github.com/SiliconBadgers/architecture/blob/main/docs/matrix-cases.csv).
-Compare a small number of tile/lane organizations for decode and prefill. Include
-MLP up/down, attention projections, tiny gate projections and the large tied
-embedding/output matrix. Report lane utilization, tail handling, cycles under
-stated assumptions, operand/partial-sum storage and bytes demanded per cycle.
-Prototype or synthesize a representative kernel when that resolves a major
-uncertainty; do not choose arithmetic widths from the old INT8 MAC example.
+## Artifact locations
 
-First useful artifact: `experiments/<study>/` containing the candidate datapath
-sketch, parameterized estimates, commands and a comparison table. Distinguish
-logical GGUF bytes from the proposed hardware format and actual bus traffic.
+| Location | What belongs here |
+|---|---|
+| [research/compute1/](../research/compute1/README.md) | Compute1's complete independent investigation and proposal for rtl-compute#2. Cover the full operation set; divide tasks within Compute1. |
+| [research/compute2/](../research/compute2/README.md) | Compute2's complete independent investigation and proposal for rtl-compute#2. Cover the full operation set; divide tasks within Compute2. |
 
-## Compute 2: stateful and non-matrix execution
+## What runs today
 
-Map attention, DeltaNet, convolution, norm, RoPE, activation and gather/copy work
-to arithmetic primitives and state lifetimes. Compare reuse of Compute 1's
-arithmetic with a specialized path. Show QK/softmax/AV sequencing, recurrent-state
-updates, convolution history and where intermediate results move.
+The signed MAC is a runnable example. The four functional boxes in Architecture do not commit the project to four engines. No final unit allocation is established here.
 
-First useful artifact: an operation/resource map and local control/datapath
-Mermaid sketch, plus representative numerical/state cases shared with
-Verification. Low measured CPU convolution time does not remove the need for
-correct convolution or establish its accelerator cost.
+These folders organize the work; they do not complete the issues. Use the
+existing evidence now and publish useful intermediate results. Arrange a team
+meeting this week to divide the work and agree on next steps.
 
-## Compare together
-
-These investigations share this repository; they do not imply fixed permanent
-engine ownership. Provide a candidate partition showing what is shared, what is
-local and the scheduling/storage cost. Model backpressure, dimension tails,
-partial-sum preservation across K tiles and prefill-to-decode state continuity.
-A useful comparison includes at least one unfavorable shape, not only a square
-matrix with perfect lane utilization.
-
-## Existing executable example
-
-The signed INT8 MAC is available for learning and reference checks. With sibling
-checkouts named `software`, `architecture` and `verification`, run:
-
-```sh
-make doctor
-make test MODELS_ROOT=../software
-```
-
-This requires Python 3.11+ and Icarus Verilog (`iverilog`, `vvp`). It validates the
-small MAC example only; it is not an INT4/BF16 engine or full-model test. The
-explicit `MODELS_ROOT` argument accommodates the Software repository rename.
+Follow [CONTRIBUTING.md](../CONTRIBUTING.md) before editing or committing.

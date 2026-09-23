@@ -1,5 +1,9 @@
 # Compute datapaths: team charter
 
+Current assignments are listed in [docs/START-HERE.md](docs/START-HERE.md) and
+the linked issues. The broader directions below provide context; they do not
+replace those deliverables.
+
 ## Purpose
 
 Explore and develop the arithmetic capabilities that turn the accelerator’s intended computations into effective hardware. The team seeks a sound balance among numerical behavior, throughput, latency, area and implementation complexity, using approaches its members choose.
